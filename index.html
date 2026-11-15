@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منافسة | Monafasa — مش لازم تتمرن لوحدك</title>
+    <meta name="description"
+        content="منافسة منصة لياقة اجتماعية تنافسية بتحوّل التمرين الفردي لمنافسة تفاعلية.">
+    <!-- LANG: runs before first paint, on EVERY page load. It adds the class "lang-pending" to <html>, so the CSS
+         shows the full-screen language picker (#lang-gate) and nothing else until the visitor picks a language.
+         The choice is deliberately NOT remembered: the picker appears every time the site is opened. -->
+    <script>
+        document.documentElement.className += ' lang-pending';
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!--
+    DEV NOTES (bilingual):
+    Every visible text = <span class="a">Arabic</span><span class="e">English</span>.
+    CSS hides the inactive language based on <html lang="ar|en"> (see "LANGUAGE SWITCH" at the end of css/style.css).
+    Attributes (placeholder / aria-label) use data-ar-* / data-en-* and are swapped by js/script.js (section 5).
+-->
+
+<body>
+    <!-- LANGUAGE PICKER: hidden by default; shown on every page load (html.lang-pending, added by the <head> script).
+         Both languages are written side by side on purpose, because the visitor hasn't chosen one yet. -->
+    <div class="lang-gate" id="lang-gate" role="dialog" aria-modal="true" aria-label="اختار لغتك | Choose your language">
+        <div class="lang-gate-box">
+            <div class="lang-gate-logo">MONAFASA</div>
+            <h2 class="lang-gate-title">
+                <span class="lang-gate-ar" lang="ar" dir="rtl">اختار لغتك</span>
+                <span class="lang-gate-en" lang="en" dir="ltr">Choose your language</span>
+            </h2>
+            <div class="lang-gate-actions">
+                <button type="button" class="lang-choice" data-lang="ar" lang="ar" dir="rtl">العربية</button>
+                <button type="button" class="lang-choice" data-lang="en" lang="en" dir="ltr">English</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">MONAFASA</a>
+            <div class="nav-links">
+                <a href="#product"><span class="a">المنتج</span><span class="e">Product</span></a>
+                <a href="#how-it-works"><span class="a">إزاي بتشتغل</span><span class="e">How It Works</span></a>
+                <a href="#technology"><span class="a">التقنية</span><span class="e">Technology</span></a>
+                <a href="#vision"><span class="a">الرؤية</span><span class="e">Vision</span></a>
+                <a href="#team"><span class="a">الفريق</span><span class="e">Team</span></a>
+            </div>
+            <div class="nav-actions">
+                <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language"
+                    data-ar-label="تغيير اللغة" data-en-label="Switch language">
+                    <span class="a">EN</span><span class="e">عربي</span>
+                </button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"
+                    data-ar-label="تبديل الثيم" data-en-label="Toggle Theme">
+                    <!-- Default icon: moon -->
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="#cta" class="btn btn-primary nav-cta"><span class="a">انضم لقائمة الانتظار</span><span class="e">Join Waitlist</span></a>
+                <button id="hamburger" class="hamburger" aria-label="Menu"
+                    data-ar-label="القائمة" data-en-label="Menu">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M3 12h18M3 6h18M3 18h18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 01 HERO SECTION -->
+        <section id="hero" class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content reveal">
+                    <h1>
+                        <span class="a">مش لازم تتمرن <span class="gradient-text">لوحدك.</span></span>
+                        <span class="e">Never Train <span class="gradient-text">Alone.</span></span>
+                    </h1>
+                    <h2>
+                        <span class="a">حوّل تمرينك لمنافسة.</span>
+                        <span class="e">Turn your workout into a competition.</span>
+                    </h2>
+                    <p>
+                        <span class="a">منافسة لعبة لياقة اجتماعية، بتتحدى فيها منافسين حقيقيين، وتتنافسوا بحركتكم، وكل واحد بيدفع التاني يعمل أكتر.</span>
+                        <span class="e">Monafasa is a social fitness game where people challenge real opponents, compete through
+                        movement, and push each other to do more.</span>
+                    </p>
+                    <p class="text-highlight">
+                        <span class="a">موبايلك بيتابع حركتك. وإنت ركّز في المنافسة.</span>
+                        <span class="e">Your phone tracks your movement. You focus on the competition.</span>
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#demo" class="btn btn-primary"><span class="a">شاهد الديمو</span><span class="e">Watch Demo</span></a>
+                        <a href="#cta" class="btn btn-secondary"><span class="a">انضم لقائمة الانتظار</span><span class="e">Join the Waitlist</span></a>
+                    </div>
+                    <div class="sub-note"><span class="a">كن من أول المجرّبين</span><span class="e">Be among the first to try it</span></div>
+                </div>
+
+                <div class="hero-visual-wrapper reveal delay-2">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-header">
+                                <span class="live-dot"></span>
+                                <span><span class="a">منافسة مباشرة</span><span class="e">LIVE COMPETITION</span></span>
+                            </div>
+                            <div class="competition-ui">
+                                <div class="player-card">
+                                    <div class="avatar you"></div>
+                                    <span class="name"><span class="a">إنت</span><span class="e">YOU</span></span>
+                                    <span class="score pulse-text">42</span>
+                                </div>
+                                <div class="vs-divider">VS</div>
+                                <div class="player-card">
+                                    <div class="avatar opp"></div>
+                                    <span class="name">ALEX</span>
+                                    <span class="score">38</span>
+                                </div>
+                            </div>
+                            <div class="motion-graph">
+                                <div class="bar h-1"></div>
+                                <div class="bar h-2"></div>
+                                <div class="bar h-3"></div>
+                                <div class="bar h-4"></div>
+                                <div class="bar h-2"></div>
+                                <div class="bar h-5"></div>
+                                <div class="bar h-3"></div>
+                            </div>
+                            <div class="status-bar">
+                                <span><span class="a">بيتابع حركتك…</span><span class="e">TRACKING MOVEMENT...</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glow-bg"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 WHY WE STARTED -->
+        <section id="why-we-started" class="section-alt">
+            <div class="container center-text reveal">
+                <h2 class="section-title">
+                    <span class="a">إحنا مؤمنين إن التمرين لازم يكون <span class="gradient-text">أقل وحدة.</span></span>
+                    <span class="e">We believe working out should feel <span class="gradient-text">less
+                        lonely.</span></span>
+                </h2>
+                <div class="story-content">
+                    <p>
+                        <span class="a">أغلب الناس بتبدأ التمرين متحمسة. وبعدين الحماس بيخفت.</span>
+                        <span class="e">Most people start working out motivated. Then the excitement fades.</span>
+                    </p>
+                    <p>
+                        <span class="a">التمرين لوحدك بيبقى مكرر. والتقدّم ساعات بيبان كأنه مش موجود. مفيش منافس بيدفعك. ولا صاحب جنبك. ولا إحساس بالمنافسة.</span>
+                        <span class="e">Training alone becomes repetitive. Progress can feel invisible. There is no opponent pushing you.
+                        No friend beside you. No sense of competition.</span>
+                    </p>
+                    <p>
+                        <span class="a">إحنا مؤمنين إن الناس مش دايمًا بتبطل عشان كسلانة. ساعات بتبطل لأن التمرين لوحدك ببساطة مبقاش ممتع.</span>
+                        <span class="e">We believe people do not always stop because they are lazy. Sometimes, they stop because working
+                        out alone simply stops being exciting.</span>
+                    </p>
+                    <div class="statement-box reveal delay-1">
+                        <p class="strong-statement">
+                            <span class="a">منافسة بدأت من فكرة بسيطة: نرجّع المنافسة والصحوبية والطاقة وإحساس الأخوّة اللي بتحسه لما بتتمرن مع غيرك.</span>
+                            <span class="e">Monafasa started from a simple idea: Bring back the competition,
+                            friendship, energy, and sense of brotherhood people feel when training with others.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 THE PROBLEM -->
+        <section id="the-problem">
+            <div class="container reveal">
+                <h2 class="section-title center-text">
+                    <span class="a">اللياقة بقت <span class="gradient-text">معزولة أوي.</span></span>
+                    <span class="e">Fitness became <span class="gradient-text">too isolated.</span></span>
+                </h2>
+                <p class="center-text mx-auto mb-large">
+                    <span class="a">تجارب اللياقة الموجودة بتركّز في الأغلب على التتبّع وخطط التمرين والمحتوى والتقدّم الشخصي. لكن الطبقة الناقصة هي التجربة الإنسانية.</span>
+                    <span class="e">Existing fitness experiences focus mainly on tracking, workout
+                    plans, content, and personal progress. But the missing layer is the human experience.</span>
+                </p>
+
+                <div class="questions-grid">
+                    <div class="question-card reveal delay-1">
+                        <h3><span class="a">بتنافس مين؟</span><span class="e">Who are you competing against?</span></h3>
+                    </div>
+                    <div class="question-card reveal delay-2">
+                        <h3><span class="a">مين اللي بيدفعك؟</span><span class="e">Who is pushing you?</span></h3>
+                    </div>
+                    <div class="question-card reveal delay-3">
+                        <h3><span class="a">بتتمرن مع مين؟</span><span class="e">Who are you training with?</span></h3>
+                    </div>
+                    <div class="question-card reveal delay-4">
+                        <h3><span class="a">عاوز تغلب مين؟</span><span class="e">Who are you trying to beat?</span></h3>
+                    </div>
+                </div>
+
+                <p class="conclusion-text reveal delay-5">
+                    <span class="a">تتبّع النشاط مش زي إنك تخلّي الناس تحب ترجع تاني.</span>
+                    <span class="e">Tracking activity is not the same as making people want to
+                    come back.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 04 THE PRODUCT -->
+        <section id="product" class="section-alt">
+            <div class="container reveal">
+                <div class="center-text">
+                    <h2 class="section-title"><span class="a">اتعرف على منافسة.</span><span class="e">Meet Monafasa.</span></h2>
+                    <p class="trio-tagline"><span class="a">عدّ. اتحدّى. اتطوّر.</span><span class="e">Track. Challenge. Grow.</span></p>
+                    <h3 class="gradient-text mb-large"><span class="a">اللياقة كتجربة لعب جماعي.</span><span class="e">Fitness as a multiplayer experience.</span></h3>
+                    <p class="mx-auto mb-large text-highlight">
+                        <span class="a">منافسة بتحوّل النشاط البدني للعبة اجتماعية تنافسية. اللاعبين بيتحدّوا منافسين في مسابقات لياقة مباشرة أو غير متزامنة، ويقارنوا الأداء، ويطلعوا في الترتيب، ويتنافسوا بحركتهم.</span>
+                        <span class="e">Monafasa turns physical activity into a social and
+                        competitive game. Players can challenge opponents in live or asynchronous fitness competitions,
+                        compare performance, climb rankings, and compete through movement.</span>
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card reveal delay-1">
+                        <div class="feature-icon">⚔️</div>
+                        <h4><span class="a">المنافسة</span><span class="e">Competition</span></h4>
+                        <p><span class="a">اتحدّى ناس حقيقيين في مباريات مثيرة.</span><span class="e">Challenge real people in exciting matches.</span></p>
+                    </div>
+                    <div class="feature-card reveal delay-2">
+                        <div class="feature-icon">🤝</div>
+                        <h4><span class="a">التواصل</span><span class="e">Connection</span></h4>
+                        <p><span class="a">اتمرن مع غيرك بدل ما تحس إنك معزول.</span><span class="e">Train with others instead of feeling isolated.</span></p>
+                    </div>
+                    <div class="feature-card reveal delay-3">
+                        <div class="feature-icon">📱</div>
+                        <h4><span class="a">تتبّع أوتوماتيك</span><span class="e">Automatic Tracking</span></h4>
+                        <p><span class="a">موبايلك بيلقط الحركة من غير ما تعدّ العدّات بإيدك.</span><span class="e">Your phone detects movement without manual rep counting.</span></p>
+                    </div>
+                    <div class="feature-card reveal delay-4">
+                        <div class="feature-icon">🏆</div>
+                        <h4><span class="a">ميكانيكا اللعبة</span><span class="e">Game Mechanics</span></h4>
+                        <p><span class="a">التحديات والترتيب والتقدّم والمنافسة بتخلّي التجربة ممتعة.</span><span class="e">Challenges, rankings, progress, and competition keep the experience engaging.</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 HOW IT WORKS -->
+        <section id="how-it-works">
+            <div class="container reveal">
+                <h2 class="section-title center-text"><span class="a">إزاي بتشتغل؟</span><span class="e">How it works</span></h2>
+
+                <div class="steps-container">
+                    <div class="step-row reveal delay-1">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3><span class="a">اتحدّى</span><span class="e">Challenge</span></h3>
+                            <p><span class="a">اختار تمرين واتحدّى لاعب تاني.</span><span class="e">Choose an exercise and challenge another player.</span></p>
+                        </div>
+                    </div>
+                    <div class="step-row reveal delay-2">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3><span class="a">اتحرّك</span><span class="e">Move</span></h3>
+                            <p><span class="a">خلّي موبايلك معاك وابدأ تمرّن.</span><span class="e">Keep your phone with you and start exercising.</span></p>
+                        </div>
+                    </div>
+                    <div class="step-row reveal delay-3">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3><span class="a">تنافس</span><span class="e">Compete</span></h3>
+                            <!-- Copy note: "motion sensors" wording moved to the Technology section only (per the new content decision). -->
+                            <p><span class="a">منافسة بتعدّ عدّاتك وحركتك أوتوماتيك وإنت بتتنافس.</span><span class="e">Monafasa counts your reps and movement automatically while you compete.</span></p>
+                        </div>
+                    </div>
+                    <div class="step-row reveal delay-4">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3><span class="a">شوف النتيجة</span><span class="e">See the Result</span></h3>
+                            <p>
+                                <span class="a">قارن الأداء، وشوف النتيجة، واطلع في الترتيب، وارجع للمنافسة اللي بعدها.</span>
+                                <span class="e">Compare performance, see the outcome, climb the rankings, and come back for the next
+                                competition.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 PRODUCT DEMO -->
+        <section id="demo" class="section-alt">
+            <div class="container center-text reveal">
+                <h2 class="section-title">
+                    <span class="a">شوف منافسة <span class="gradient-text">بتشتغل.</span></span>
+                    <span class="e">See Monafasa <span class="gradient-text">in action.</span></span>
+                </h2>
+                <p class="mx-auto mb-large text-highlight">
+                    <span class="a">تمرين حقيقي. منافس حقيقي. منافسة حقيقية.</span>
+                    <span class="e">A real workout. A real opponent. A real competition.</span>
+                </p>
+
+                <div class="demo-videos-grid reveal delay-1">
+                    <figure class="demo-item">
+                        <div class="video-wrapper">
+                            <video class="demo-video" src="videos/WhatsApp%20Video%202026-09-28%20at%204.10.29%20AM.mp4"
+                                autoplay loop muted playsinline controls></video>
+                        </div>
+                        <figcaption class="video-caption">01 | <span class="a">عدّ</span><span class="e">Track</span></figcaption>
+                    </figure>
+                    <figure class="demo-item">
+                        <div class="video-wrapper">
+                            <video class="demo-video" src="videos/WhatsApp%20Video%202026-09-28%20at%204.10.32%20AM.mp4"
+                                autoplay loop muted playsinline controls></video>
+                        </div>
+                        <figcaption class="video-caption">02 | <span class="a">اتحدّى</span><span class="e">Challenge</span></figcaption>
+                    </figure>
+                    <figure class="demo-item">
+                        <div class="video-wrapper">
+                            <video class="demo-video" src="videos/WhatsApp%20Video%202026-09-28%20at%204.10.33%20AM.mp4"
+                                autoplay loop muted playsinline controls></video>
+                        </div>
+                        <figcaption class="video-caption">03 | <span class="a">اتطوّر</span><span class="e">Grow</span></figcaption>
+                    </figure>
+                </div>
+
+                <div class="demo-cta reveal delay-2">
+                    <a href="#cta" class="btn btn-primary"><span class="a">انضم لقائمة الانتظار</span><span class="e">Join the Waitlist</span></a>
+                    <div class="sub-note"><span class="a">كن من أول المجرّبين</span><span class="e">Be among the first to try it</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 TECHNOLOGY & PROOF + PRODUCT STAGE -->
+        <section id="technology">
+            <div class="container reveal">
+                <h2 class="section-title center-text">
+                    <span class="a">متبني على <span class="gradient-text">بيانات حركة حقيقية.</span></span>
+                    <span class="e">Built from <span class="gradient-text">real movement data.</span></span>
+                </h2>
+                <p class="center-text mx-auto mb-large">
+                    <span class="a">منافسة بتطوّر نظام خاص بيها لمعالجة إشارات الـ IMU، متصمّم يكتشف الحركة البدنية ويعدّها باستخدام حساسات حركة الموبايل لوحدها.</span>
+                    <span class="e">Monafasa is developing a proprietary IMU signal-processing
+                    pipeline designed to detect and count physical movement using smartphone motion sensors alone.</span>
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-card reveal delay-1">
+                        <div class="stat-number gradient-text">8+</div>
+                        <div class="stat-label"><span class="a">شهور بحث وتطوير</span><span class="e">Months of R&amp;D</span></div>
+                    </div>
+                    <div class="stat-card reveal delay-2">
+                        <div class="stat-number gradient-text">6</div>
+                        <div class="stat-label"><span class="a">طرق كشف جرّبناها</span><span class="e">Detection approaches tested</span></div>
+                    </div>
+                    <div class="stat-card reveal delay-3">
+                        <div class="stat-number gradient-text">100+</div>
+                        <div class="stat-label"><span class="a">ملف جلسة تمرين</span><span class="e">Training session files</span></div>
+                    </div>
+                    <div class="stat-card reveal delay-4">
+                        <div class="stat-number gradient-text">30+</div>
+                        <div class="stat-label"><span class="a">مختبرين جرّبوه</span><span class="e">Testers</span></div>
+                    </div>
+                </div>
+
+                <div class="tech-statement reveal delay-5">
+                    <p><span class="a">من غير كاميرا. من غير ساعة ذكية. من غير جهاز غالي.</span><span class="e">No camera. No smartwatch. No expensive wearable.</span></p>
+                    <p class="text-highlight"><span class="a">بس الموبايل اللي الناس شايلاه أصلًا.</span><span class="e">Just the phone people already carry.</span></p>
+                </div>
+
+                <!-- Product Stage Banner -->
+                <div class="stage-banner reveal delay-6">
+                    <div class="stage-header">
+                        <h3><span class="a">من نموذج أولي لنسخة الـ MVP.</span><span class="e">From prototype to MVP.</span></h3>
+                        <span class="badge"><span class="a">بنبني نسخة الـ MVP</span><span class="e">Building MVP</span></span>
+                    </div>
+                    <p>
+                        <span class="a">عندنا دلوقتي نموذج أولي شغّال، وماشيين ناحية نسخة MVP كاملة متصمّمة لاختبار أول المستخدمين والشركاء.</span>
+                        <span class="e">We currently have a working prototype and are moving toward a full MVP designed for early-user
+                        and partner testing.</span>
+                    </p>
+                    <ul class="focus-list">
+                        <li><span class="a">تحسين دقة اكتشاف الحركة</span><span class="e">Improving movement-detection accuracy</span></li>
+                        <li><span class="a">توسيع تجربة المنافسة</span><span class="e">Expanding the competition experience</span></li>
+                        <li><span class="a">التأكد من تفاعل المستخدمين</span><span class="e">Validating user engagement</span></li>
+                        <li><span class="a">التحضير للاختبار المبكّر</span><span class="e">Preparing for early testing</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 VISION -->
+        <section id="vision" class="section-alt">
+            <div class="container reveal">
+                <h2 class="section-title">
+                    <span class="a">من تطبيق لياقة <br><span class="gradient-text">لتجربة ممتعة.</span></span>
+                    <span class="e">From fitness app to <br><span class="gradient-text">enjoyful experience.</span></span>
+                </h2>
+                <div class="vision-intro">
+                    <p><span class="a">النهارده بنبدأ بمنافسة لياقة واحد ضد واحد. وطموحنا على المدى الطويل أكبر بكتير.</span><span class="e">Today, we are starting with 1v1 fitness competition. Our long-term ambition is much bigger.</span></p>
+                    <p class="text-highlight">
+                        <span class="a">بنتخيّل عالم تقدر فيه تتمرن وتتنافس مع أي حد، في أي مكان.</span>
+                        <span class="e">We envision a world where people can train and compete with anyone,
+                        anywhere.</span>
+                    </p>
+                </div>
+
+                <!-- Roadmap path: phone -> communities -> VR -->
+                <div class="vision-path reveal delay-1">
+                    <div class="path-node">
+                        <div class="path-icon"><svg viewBox="0 0 64 64"><rect x="18" y="4" width="28" height="56" rx="7"/><path d="M28 52h8"/><path d="M24 26l6 6 10-12"/></svg></div>
+                        <b><span class="a">النهارده: موبايلك</span><span class="e">Today: your phone</span></b>
+                    </div>
+                    <span class="path-arrow" aria-hidden="true">➜</span>
+                    <div class="path-node">
+                        <div class="path-icon"><svg viewBox="0 0 64 64"><circle cx="32" cy="16" r="7"/><circle cx="13" cy="48" r="7"/><circle cx="51" cy="48" r="7"/><path d="M28 22L17 42M36 22l11 20M20 48h24"/></svg></div>
+                        <b><span class="a">مجتمعات الجيمات والمدربين</span><span class="e">Gym &amp; coach communities</span></b>
+                    </div>
+                    <span class="path-arrow" aria-hidden="true">➜</span>
+                    <div class="path-node">
+                        <div class="path-icon"><svg viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="28" rx="10"/><circle cx="23" cy="32" r="6"/><circle cx="41" cy="32" r="6"/></svg></div>
+                        <b><span class="a">ومع الوقت: VR</span><span class="e">Over time: VR</span></b>
+                    </div>
+                </div>
+
+                <div class="vision-grid">
+                    <div class="vision-card reveal delay-1">
+                        <div class="vision-icon"><svg viewBox="0 0 64 64"><path d="M20 8h24v14a12 12 0 0 1-24 0zM20 14H10c0 10 5 14 10 14M44 14h10c0 10-5 14-10 14M32 34v12M22 56h20M26 46h12"/></svg></div>
+                        <h4><span class="a">الرياضيين</span><span class="e">Athletes</span></h4>
+                        <p>
+                            <span class="a">منافسات رسمية بين الرياضيين العاديين والمحترفين، والجمهور يعيش التمرين والمنافسة من جوّه جنب الرياضيين.</span>
+                            <span class="e">Create official competitions between everyday athletes and professionals. Allow fans to
+                            experience training and competition directly alongside athletes.</span>
+                        </p>
+                    </div>
+                    <div class="vision-card reveal delay-2">
+                        <div class="vision-icon"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="12"/><circle cx="32" cy="32" r="3"/><path d="M32 4v10M32 50v10M4 32h10M50 32h10"/></svg></div>
+                        <h4><span class="a">المواهب</span><span class="e">Talent</span></h4>
+                        <p>
+                            <span class="a">طرق جديدة لاكتشاف المواهب الرياضية من أداء حقيقي بيتقاس.</span>
+                            <span class="e">Create new ways to discover and scout athletic talent through measurable real-world
+                            performance.</span>
+                        </p>
+                    </div>
+                    <div class="vision-card reveal delay-3">
+                        <div class="vision-icon"><svg viewBox="0 0 64 64"><circle cx="32" cy="16" r="7"/><circle cx="13" cy="48" r="7"/><circle cx="51" cy="48" r="7"/><path d="M28 22L17 42M36 22l11 20M20 48h24"/></svg></div>
+                        <h4><span class="a">الجيمات</span><span class="e">Gyms</span></h4>
+                        <p>
+                            <span class="a">نساعد الجيمات تتحوّل لمجتمعات وبراندات تنافسية بتحدياتها وهويتها ونشاطها.</span>
+                            <span class="e">Help gyms become communities and competitive brands with their own challenges, identity, and
+                            activity.</span>
+                        </p>
+                    </div>
+                    <div class="vision-card reveal delay-4">
+                        <div class="vision-icon"><svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20"/><path d="M32 36V24M26 8h12M32 8v8M48 16l4-4"/></svg></div>
+                        <h4><span class="a">المدربين</span><span class="e">Coaches</span></h4>
+                        <p>
+                            <span class="a">نمكّن المدربين يبنوا مجتمعات حوالين فلسفتهم التدريبية ويتنافسوا من خلال برامجهم.</span>
+                            <span class="e">Enable coaches to build communities around their training philosophy and compete through
+                            their own programs.</span>
+                        </p>
+                    </div>
+                    <div class="vision-card reveal delay-5">
+                        <div class="vision-icon"><svg viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="28" rx="10"/><circle cx="23" cy="32" r="6"/><circle cx="41" cy="32" r="6"/></svg></div>
+                        <h4><span class="a">الرياضة الغامرة</span><span class="e">Immersive Sports</span></h4>
+                        <p>
+                            <span class="a">ومع الوقت، نتوسّع من تجارب الموبايل لتقنيات غامرة زي الـ VR وبيئات رقمية مستقبلية.</span>
+                            <span class="e">Over time, expand from mobile experiences toward immersive technologies such as VR and future
+                            digital environments.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vision-conclusion reveal delay-6">
+                    <p><span class="a">هدفنا مش بس نحوّل التمرين للعبة.</span><span class="e">The goal is not simply to gamify exercise.</span></p>
+                    <p class="strong-statement">
+                        <span class="a">هدفنا إن النشاط البدني يبقى اجتماعي وتنافسي وغامر ومليان حياة.</span>
+                        <span class="e">The goal is to make physical activity feel social, competitive,
+                        immersive, and alive.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 TEAM -->
+        <section id="team">
+            <div class="container reveal">
+                <h2 class="section-title center-text">
+                    <span class="a">فريق صغير <span class="gradient-text">بطموح كبير.</span></span>
+                    <span class="e">Built by a small team with a <span class="gradient-text">big
+                        ambition.</span></span>
+                </h2>
+                <p class="center-text mx-auto mb-large text-highlight"><span class="a">بنبني منافسة من الصفر.</span><span class="e">We are building Monafasa from the ground up.</span></p>
+
+                <div class="team-grid">
+                    <div class="team-card reveal delay-1">
+                        <div class="team-avatar">
+                            <img src="images/mahmoud.png" alt="Mahmoud Ahmed">
+                        </div>
+                        <h3>Mahmoud Ahmed</h3>
+                        <p class="role gradient-text"><span class="a">المؤسس والمسؤول التقني</span><span class="e">Founder &amp; Tech Lead</span></p>
+                        <p><span class="a">مسؤول عن اتجاه المنتج والتطوير التقني وأبحاث الذكاء الحركي.</span><span class="e">Responsible for product direction, technical development, and motion-intelligence R&amp;D.</span></p>
+                    </div>
+                    <div class="team-card reveal delay-2">
+                        <div class="team-avatar">
+                            <img src="images/marwan3.png" alt="Marwan Ahmed">
+                        </div>
+                        <h3>Marwan Ahmed</h3>
+                        <p class="role gradient-text"><span class="a">النمو والتسويق</span><span class="e">Growth &amp; Marketing</span></p>
+                        <p><span class="a">مسؤول عن النمو والتسويق وجذب المستخدمين وتطوير السوق.</span><span class="e">Responsible for growth, marketing, user acquisition, and market development.</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 CALL TO ACTION -->
+        <section id="cta" class="cta-section section-alt">
+            <div class="container center-text reveal">
+                <h2 class="section-title">
+                    <span class="a">جاهز <span class="gradient-text">تتنافس؟</span></span>
+                    <span class="e">Ready to <span class="gradient-text">compete?</span></span>
+                </h2>
+                <p class="mx-auto mb-large font-bold" style="font-size: 1.25rem;">
+                    <span class="a">مستقبل اللياقة مش لازم يبقى تمرين لوحدك.</span>
+                    <span class="e">The future of fitness should not feel
+                    like training alone.</span>
+                </p>
+
+                <form class="waitlist-form reveal delay-1"
+                    onsubmit="event.preventDefault(); alert(document.documentElement.lang === 'ar' ? 'شكرًا لانضمامك لقائمة الانتظار!' : 'Thank you for joining the waitlist!');">
+                    <input type="email" placeholder="اكتب إيميلك" required
+                        data-ar-placeholder="اكتب إيميلك" data-en-placeholder="Enter your email address">
+                    <button type="submit" class="btn btn-primary"><span class="a">انضم لمنافسة</span><span class="e">Join Monafasa</span></button>
+                </form>
+                <div class="sub-note"><span class="a">كن من أول المجرّبين</span><span class="e">Be among the first to try it</span></div>
+
+                <div class="cta-secondary reveal delay-2">
+                    <a href="#demo" class="btn btn-secondary"><span class="a">شاهد الديمو</span><span class="e">Watch the Demo</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 11 FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>MONAFASA</h2>
+                    <p class="gradient-text font-bold"><span class="a">مش لازم تتمرن لوحدك.</span><span class="e">Never Train Alone.</span></p>
+                </div>
+                <div class="footer-nav">
+                    <a href="#hero"><span class="a">الرئيسية</span><span class="e">Home</span></a>
+                    <a href="#product"><span class="a">المنتج</span><span class="e">Product</span></a>
+                    <a href="#technology"><span class="a">التقنية</span><span class="e">Technology</span></a>
+                    <a href="#vision"><span class="a">الرؤية</span><span class="e">Vision</span></a>
+                    <a href="#team"><span class="a">الفريق</span><span class="e">Team</span></a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="YouTube">YouTube</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><span class="a">&copy; 2026 منافسة. كل الحقوق محفوظة.</span><span class="e">&copy; 2026 Monafasa. All rights reserved.</span></p>
+                <a href="#hero" class="back-to-top"><span class="a">للأعلى &uarr;</span><span class="e">Back to top &uarr;</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky join bar (mobile only: the nav "Join Waitlist" button is hidden under 768px) -->
+    <div class="mobile-bar" id="mobile-bar">
+        <a href="#cta" class="btn btn-primary"><span class="a">انضم لقائمة الانتظار</span><span class="e">Join the Waitlist</span></a>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
