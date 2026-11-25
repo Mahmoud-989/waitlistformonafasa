@@ -168,4 +168,20 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileBar.classList.toggle('is-hidden', entries[0].isIntersecting);
         }, { threshold: 0.2 }).observe(ctaSection);
     }
+
+    // 7. Demo clips: the native controls only show while a clip is hovered, focused or tapped,
+    // so they don't cover the small portrait clips. Without JS they are simply always visible.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.demo-video').forEach(video => {
+        if (reduceMotion) {
+            video.autoplay = false;
+            video.pause();
+            return;                                     // keep the controls, let the visitor press play
+        }
+        video.controls = false;
+        ['pointerenter', 'focus', 'click'].forEach(ev => video.addEventListener(ev, () => { video.controls = true; }));
+        ['pointerleave', 'blur'].forEach(ev => video.addEventListener(ev, e => {
+            if (e.pointerType !== 'touch' && document.activeElement !== video) video.controls = false;
+        }));
+    });
 });
