@@ -1,18 +1,16 @@
 /* CSS Variables for Dark and Light Themes */
 :root {
     --bg: #090909;
-    --surface: #0e0f0c;
-    --surface-hover: #1a1c16;
-    --surface-border: rgba(255, 255, 255, 0.11);
+    --surface: #090909;
+    --surface-hover: #14141a;
+    --surface-border: rgba(255, 255, 255, 0.08);
     --text-main: #FFFFFF;
     --text-muted: #A1A1AA;
     --accent: #b4e405;
     --accent-glow: rgba(180, 228, 5, 0.25);
     --accent-hover: #ccee33;
-    --on-accent: #0b0d04;
-    /* text on neon */
     --nav-bg: rgba(9, 9, 9, 0.85);
-    --card-bg: linear-gradient(160deg, #171914 0%, #10110e 100%);
+    --card-bg: linear-gradient(145deg, #090909 0%, #090909 100%);
 }
 
 :root.light-theme {
@@ -58,12 +56,10 @@ h4 {
     line-height: 1.2;
     font-weight: 700;
     letter-spacing: -0.02em;
-    text-wrap: balance;
 }
 
 h1 {
     font-size: clamp(3rem, 6vw, 5.5rem);
-    text-wrap: wrap;
     margin-bottom: 1rem;
 }
 
@@ -84,7 +80,6 @@ h4 {
 
 p {
     color: var(--text-muted);
-    text-wrap: pretty;
     font-size: 1.125rem;
     margin-bottom: 1rem;
 }
@@ -110,7 +105,6 @@ p {
 }
 
 .mx-auto {
-    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -127,9 +121,8 @@ p {
 }
 
 section {
-    padding: 104px 0;
+    padding: 120px 0;
     position: relative;
-    scroll-margin-top: 64px;
 }
 
 .section-alt {
@@ -155,8 +148,7 @@ section {
 
 .btn-primary {
     background-color: var(--accent);
-    color: var(--on-accent);
-    font-weight: 700;
+    color: #FFF;
     box-shadow: 0 4px 20px var(--accent-glow);
 }
 
@@ -492,10 +484,8 @@ section {
 .statement-box {
     margin-top: 3rem;
     padding: 3rem 2rem;
-    background:
-        radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 65%),
-        var(--card-bg);
-    border: 1px solid var(--accent-glow);
+    background: var(--card-bg);
+    border: 1px solid var(--surface-border);
     border-radius: 24px;
 }
 
@@ -507,55 +497,53 @@ section {
     margin: 0 !important;
 }
 
-/* The problem: "something new every time" cards */
-.new-grid {
+/* Problems Grid */
+.questions-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 800px;
-    margin: 3rem auto 0;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
 }
 
-.new-card {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.75rem;
+.question-card {
+    padding: 3rem 2rem;
     background: var(--card-bg);
     border: 1px solid var(--surface-border);
     border-radius: 24px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.new-card .vision-icon {
-    flex: none;
-    margin: 0;
+.question-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
 }
 
-.new-card h3 {
+.question-card h3 {
     margin: 0;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+    color: var(--text-main);
 }
 
 .conclusion-text {
-    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    text-wrap: balance;
     color: var(--text-main);
     max-width: 800px;
     margin: 0 auto;
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 /* Features Grid */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
 }
 
 .feature-card {
-    padding: 2rem;
+    padding: 2.5rem;
     background: var(--card-bg);
     border: 1px solid var(--surface-border);
     border-radius: 24px;
@@ -568,141 +556,106 @@ section {
     transform: translateY(-5px);
 }
 
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
 
 .feature-card p {
     margin: 0;
     font-size: 1rem;
 }
 
-/* How it works + demo: one slide, steps beside the clips */
-.how-section {
-    padding: 60px 0;
-}
-
-.how-section .section-title {
-    margin-bottom: 0.75rem;
-}
-
-.how-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: 3.5rem;
-    align-items: center;
-    margin-top: 2.5rem;
-}
-
+/* Steps (How it Works) */
 .steps-container {
-    list-style: none;
+    max-width: 800px;
+    margin: 4rem auto 0;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 
 .step-row {
-    position: relative;
     display: flex;
-    gap: 1.25rem;
+    gap: 2.5rem;
     align-items: flex-start;
-    padding-bottom: 1.75rem;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.step-row:last-child {
-    padding-bottom: 0;
-}
-
-/* line that joins one step number to the next */
-.step-row:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    top: 52px;
-    bottom: 0;
-    inset-inline-start: 25px;
-    width: 2px;
-    background: linear-gradient(var(--accent), transparent);
-    opacity: 0.45;
+.step-row:hover {
+    transform: translateX(10px);
+    border-color: var(--accent-glow);
 }
 
 .step-number {
-    flex: none;
-    width: 52px;
-    height: 52px;
-    display: grid;
-    place-items: center;
-    border-radius: 16px;
-    border: 1px solid var(--accent-glow);
-    background: var(--card-bg);
-    color: var(--accent);
-    font-size: 1.2rem;
+    font-size: 3.5rem;
     font-weight: 800;
+    color: var(--surface-border);
     line-height: 1;
+    -webkit-text-stroke: 1px var(--text-muted);
+    color: transparent;
 }
 
 .step-content h3 {
-    margin-bottom: 0.2rem;
-    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
 }
 
 .step-content p {
     margin: 0;
-    font-size: 1rem;
 }
 
-.how-demo {
-    scroll-margin-top: 110px;
-}
-
-.how-demo-title {
-    text-align: center;
-    margin-bottom: 1.25rem;
-}
-
+/* Video Demo */
 .demo-videos-grid {
+    max-width: 1000px;
+    margin: 3rem auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
-/* The files are 16:9 with a portrait clip in the middle: show only the portrait part */
 .video-wrapper {
-    aspect-ratio: 9 / 16;
-    background: #000;
+    background: var(--card-bg);
     border: 1px solid var(--surface-border);
-    border-radius: 24px;
+    border-radius: 32px;
     overflow: hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.video-wrapper:hover,
-.video-wrapper:focus-within {
+.video-wrapper:hover {
+    transform: translateY(-5px);
     border-color: var(--accent);
-    box-shadow: 0 10px 40px var(--accent-glow);
 }
 
 .demo-video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
-}
-
-.demo-video:fullscreen {
-    object-fit: contain;
 }
 
 /* Tech Stats */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
     margin: 4rem 0;
 }
 
 .stat-card {
     text-align: center;
-    padding: 1rem 1.25rem;
-    border-inline-end: 1px solid var(--surface-border);
+    padding: 2rem;
+    border-right: 1px solid var(--surface-border);
 }
 
 .stat-card:last-child {
-    border-inline-end: none;
+    border-right: none;
 }
 
 .stat-number {
@@ -713,10 +666,8 @@ section {
 }
 
 .stat-label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
-    line-height: 1.5;
-    text-wrap: balance;
     color: var(--text-main);
 }
 
@@ -768,7 +719,7 @@ section {
     margin-top: 1.5rem;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
 }
 
@@ -795,22 +746,17 @@ section {
 
 .vision-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     margin-bottom: 4rem;
 }
 
 .vision-card {
-    grid-column: span 2;
-    padding: 2rem;
-    background: var(--card-bg);
+    padding: 2.5rem;
+    background: var(--bg);
     border: 1px solid var(--surface-border);
     border-radius: 24px;
     transition: transform 0.3s ease;
-}
-
-.vision-card:nth-child(n + 4) {
-    grid-column: span 3;
 }
 
 .vision-card:hover {
@@ -849,9 +795,8 @@ section {
 }
 
 .team-avatar {
-    width: 116px;
-    height: 116px;
-    border: 2px solid var(--accent);
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: var(--surface-border);
     margin: 0 auto 1.5rem;
@@ -878,8 +823,7 @@ section {
 
 /* CTA Section */
 .cta-section {
-    padding: 140px 0;
-    background: radial-gradient(ellipse at 50% 100%, var(--accent-glow) 0%, transparent 60%);
+    padding: 150px 0;
 }
 
 .waitlist-form {
@@ -894,7 +838,7 @@ section {
     padding: 1rem 1.5rem;
     border-radius: 50px;
     border: 1px solid var(--surface-border);
-    background: var(--surface);
+    background: var(--bg);
     color: var(--text-main);
     font-size: 1rem;
     font-family: inherit;
@@ -1067,10 +1011,6 @@ footer {
         margin-top: 2rem;
     }
 
-    .hero {
-        padding: 128px 0 72px;
-    }
-
     h1 {
         font-size: 3.5rem;
     }
@@ -1080,42 +1020,13 @@ footer {
         text-align: center;
     }
 
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .how-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
-    .steps-container,
-    .how-demo {
-        width: 100%;
-        max-width: 640px;
-        margin-inline: auto;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 1.5rem;
-    }
-
-    .stat-card:nth-child(2n) {
-        border-inline-end: none;
+    .stat-card {
+        border-right: none;
+        border-bottom: 1px solid var(--surface-border);
     }
 
     .stat-card:last-child {
-        grid-column: 1 / -1;
-    }
-
-    .vision-card,
-    .vision-card:nth-child(n + 4) {
-        grid-column: span 3;
-    }
-
-    .vision-card:last-child {
-        grid-column: 1 / -1;
+        border-bottom: none;
     }
 }
 
@@ -1154,45 +1065,19 @@ footer {
         width: 100%;
     }
 
-    section,
-    .how-section {
-        padding: 76px 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .new-grid,
-    .features-grid,
-    .focus-list {
-        grid-template-columns: 1fr;
+    .steps-container {
+        gap: 1rem;
     }
 
-    .vision-grid {
-        grid-template-columns: 1fr;
+    .step-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
     }
 
-    .vision-card,
-    .vision-card:nth-child(n + 4) {
-        grid-column: auto;
-    }
-
-    /* clips: swipe sideways, the next one peeks in */
-    .demo-videos-grid {
-        grid-template-columns: repeat(3, 62%);
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        margin-inline: -5vw;
-        padding-inline: 5vw;
-        scroll-padding-inline: 5vw;
-    }
-
-    .demo-videos-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .demo-item {
-        scroll-snap-align: start;
+    .step-number {
+        font-size: 2.5rem;
+        margin: 0 auto;
     }
 }
 
@@ -1294,7 +1179,7 @@ html[lang="ar"] .trio-tagline {
 }
 
 .demo-cta {
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 /* Vision roadmap: phone -> communities -> VR */
@@ -1316,7 +1201,7 @@ html[lang="ar"] .trio-tagline {
     width: 92px;
     height: 92px;
     border-radius: 50%;
-    background: var(--card-bg);
+    background: var(--bg);
     border: 1px solid var(--surface-border);
     display: grid;
     place-items: center;
@@ -1373,7 +1258,7 @@ html[lang="ar"] .trio-tagline {
     height: 32px;
 }
 
-/* Sticky join bar: phones only (the nav "Save Your Spot" button is hidden under 768px) */
+/* Sticky join bar: phones only (the nav "Join Waitlist" button is hidden under 768px) */
 .mobile-bar {
     display: none;
 }
@@ -1396,10 +1281,23 @@ html[dir="rtl"] .focus-list li::before {
     content: '←';
 }
 
+html[dir="rtl"] .stat-card {
+    border-right: none;
+    border-left: 1px solid var(--surface-border);
+}
+
+html[dir="rtl"] .stat-card:last-child {
+    border-left: none;
+}
+
 /* keep "8+", "100+" readable: digits + plus sign are one left-to-right unit */
 html[dir="rtl"] .stat-number {
     direction: ltr;
     unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .step-row:hover {
+    transform: translateX(-10px);
 }
 
 html[dir="rtl"] .phone-frame {
@@ -1412,6 +1310,17 @@ html[dir="rtl"] .phone-frame:hover {
 
 html[dir="rtl"] .path-arrow {
     transform: scaleX(-1);
+}
+
+@media (max-width: 992px) {
+    html[dir="rtl"] .stat-card {
+        border-left: none;
+        border-bottom: 1px solid var(--surface-border);
+    }
+
+    html[dir="rtl"] .stat-card:last-child {
+        border-bottom: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1456,6 +1365,7 @@ html[dir="rtl"] .path-arrow {
         align-items: stretch;
     }
 }
+
 
 /* =====================================================================
    LANGUAGE PICKER (shown on every page load)
@@ -1560,31 +1470,5 @@ html.lang-pending .lang-gate {
 @media (max-width: 768px) {
     .lang-choice {
         flex: 1 1 100%;
-    }
-}
-
-/* Keyboard focus + reduced motion */
-a:focus-visible,
-button:focus-visible,
-video:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-
-    .reveal {
-        opacity: 1;
-        transform: none;
     }
 }
